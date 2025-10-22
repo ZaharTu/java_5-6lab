@@ -11,6 +11,7 @@ public class Main{
         };
         System.out.println(Arrays.toString(getCarByBrend(cars, "Toyota")));
         System.out.println(Arrays.toString(getCarByBrend(cars, "123")));
+        System.out.println(Arrays.toString(getCarByBrendAndYearOperational(cars, "Toyota", 4)));
     }
     public static Car[] getCarByBrend(Car[] cars, String brend){
         int count=0;
@@ -27,5 +28,29 @@ public class Main{
             }
         }
         return ret_cars;
+    }
+    public static Car[] getCarByBrendAndYearOperational(Car[] cars, String brend, int years) {
+        final int CURRENT_YEAR = 2025;
+        int count = 0;
+        for (Car car : cars) {
+            if (car.getBrend().equals(brend)) {
+                int operationalYears = CURRENT_YEAR - car.getYear();
+                if (operationalYears > years) {
+                    count++;
+                }
+            }
+        }
+        Car[] result = new Car[count];
+        int index = 0;
+        for (Car car : cars) {
+            if (car.getBrend().equals(brend)) {
+                int operationalYears = CURRENT_YEAR - car.getYear();
+                if (operationalYears > years) {
+                    result[index++] = car;
+                }
+            }
+        }
+
+        return result;
     }
 }
